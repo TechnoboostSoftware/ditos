@@ -1,0 +1,85 @@
+* {
+    font-family: Plus Jakarta Sans;
+    font-style: normal;
+    font-size: 16px;
+}
+
+.bg-main {
+    background: #0079E9;
+}
+
+.bg-lightBlue {
+    background: linear-gradient(1deg, rgba(0, 121, 233, 0.00) -1149.92%, #F2F8FE 54.15%);
+}
+
+.text-main {
+    color: #0079E9;
+}
+
+.bg-grey {
+    background: rgba(237, 241, 245, 0.46);
+}
+
+.keyBtn {
+    border: 1px solid rgba(0, 121, 233, 0.22);
+    background: #F0F8FF;
+}
+
+.blueBox {
+    border-radius: 5px;
+    background: rgba(0, 121, 233, 0.05);
+}
+
+.differentBtn {
+    color: rgba(40, 46, 50, 0.80);
+    font-size: 16px;
+    font-weight: 400;
+    border-radius: 5px;
+    border: 1px solid rgba(0, 121, 233, 0.10);
+    background: #FFF;
+    text-align: center;
+}
+
+.differentWhite {
+    background: #F9F9F9 !important;
+
+}
+
+.footer {
+    background: #1A2938;
+}
+
+.overlay {
+    width: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.7);
+    height: 100vh;
+    opacity: 0;
+    z-index: -1;
+}
+
+.showover {
+    z-index: 1;
+    opacity: 1;
+}
+
+#form {
+    z-index: 10 !important;
+}
+
+.content {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 60%;
+}
+.redBorder {
+    border: 1px solid red !important;
+}
+@media screen and (max-width: 767px){
+    .content {
+        position: absolute;
+        width: 100%;
+    }
+}
