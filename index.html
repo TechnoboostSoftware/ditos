@@ -1,396 +1,268 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DiTOS - Digital Transformation of Stores</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link
-            href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap"
-            rel="stylesheet">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-        <link rel="stylesheet" href="project.css">
-        <script src="https://cdn.tailwindcss.com"></script>
+  <body>
+    <div class="ditos-root">
 
-    </head>
-
-    <body>
-
-        <div class="overlay"></div>
-
-        <nav class="md:flex hidden justify-between items-center px-5 py-3 bg-white">
-            <div class="flex items-center gap-x-3">
-                <div class="">
-                    <img src="images/logo.svg">
-                </div>
-                <div class="">
-                    <a href="#" class="font-medium text-base px-5">Key Modules</a>
-                    <a href="#" class="font-medium text-base px-5">Features</a>
-                    <a href="#" class="font-medium text-base px-5" onclick="contactPopUp()">Contact Us</a>
-                </div>
+      <!-- Contact Modal -->
+      <div class="modal-overlay" id="contact-modal">
+        <div class="modal-box">
+          <button class="modal-close close-contact"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+          <div class="modal-left">
+            <div class="modal-form" style="display:flex">
+              <div><h2>Our Product</h2><p class="form-subtitle">Fill out the form below and we'll get back to you with the details.</p></div>
+              <form id="contact-form" style="display:flex;flex-direction:column;gap:16px">
+                <div class="form-row"><div class="form-group"><label>Full Name <span class="req">*</span></label><input required type="text" placeholder="John Doe"/></div><div class="form-group"><label>Email <span class="req">*</span></label><input required type="email" placeholder="john@example.com"/></div></div>
+                <div class="form-row"><div class="form-group"><label>Phone <span class="req">*</span></label><input required type="tel" placeholder="+91 98765 43210"/></div><div class="form-group"><label>Name of the Business</label><input type="text" placeholder="Acme Corp"/></div></div>
+                <div class="form-group"><label>Location</label><input type="text" placeholder="City, State"/></div>
+                <div class="form-group"><label>Message</label><textarea rows="3" placeholder="Tell us about your requirements..."></textarea></div>
+                <button type="submit" class="btn-blue" style="width:100%;padding:14px 32px;font-size:16px;margin-top:8px">Submit Details</button>
+              </form>
             </div>
-            <div class="flex items-center gap-x-2">
-                <button class="px-3 py-2 font-medium text-base border rounded">Login</button>
-                <button class="px-3 py-2 font-medium text-base border rounded bg-main text-white" onclick="popUp()">Book
-                    Demo</button>
+            <div class="modal-thanks">
+              <div class="check-circle">&#10003;</div>
+              <div><h2>Thank You</h2><p>Thank you, our team will contact you shortly to discuss how DiTOS can help your business.</p></div>
+              <button class="btn-blue close-contact" style="margin-top:16px">Back to Home</button>
             </div>
-        </nav>
-        <nav class="open">
-            <div class="md:hidden flex justify-between items-center px-5 py-3 bg-white">
-                <img src="images/logo.svg">
-                <img src="images/toggle.svg" class="ml-auto" onclick="toggleNav()">
-            </div>
-
-            <div class="flex flex-col hidden" id="toggleBtn">
-                <div class="flex justify-between px-4 py-3 border-b border-t">
-                    <p class="font-medium text-base">Home</p>
-                    <img src="images/toggleRight.svg">
-                </div>
-                <div class="flex justify-between px-4 py-3 border-b">
-                    <p class="font-medium text-base">Modules</p>
-                    <img src="images/toggleRight.svg">
-                </div>
-                <div class="flex justify-between px-4 py-3 border-b">
-                    <p class="font-medium text-base">Features</p>
-                    <img src="images/toggleRight.svg">
-                </div>
-                <div class="flex justify-between px-4 py-3 border-b">
-                    <p class="font-medium text-base">Book Demo</p>
-                    <img src="images/toggleRight.svg">
-                </div>
-                <div class="flex justify-between px-4 py-3 border-b" onclick="contactPopUp()">
-                    <p class="font-medium text-base">Contact Us</p>
-                    <img src="images/toggleRight.svg">
-                </div>
-                <div class="flex justify-between px-4 py-3 border-b">
-                    <p class="font-medium text-base">Login</p>
-                    <img src="images/toggleRight.svg">
-                </div>
-            </div>
-        </nav>
-
-        <!-- ######################### popUpDemo ######################### -->
-        <div id="form"
-            class="flex justify-center bg-white items-center hidden rounded drop-shadow-md z-10 fixed content">
-            <div class="grid md:grid-cols-12 grid-cols-1 items-center relative ">
-                <img src="images/closeDemo.svg" class="absolute top-0 right-0 pt-4 pr-4" onclick="popUpCancel()">
-                <div class="col-span-5 md:flex hidden">
-                    <img src="images/demoLeft.svg" class="w-full">
-                </div>
-                <div class="flex flex-col md:col-span-7 col-1 md:px-14 px-5 py-5">
-                    <div class="flex flex-col justify-center items-center ">
-                        <p class="md:text-2xl text-xl font-semibold text-center pb-3">Schedule a Demo</p>
-                        <p class="mb-0 md:text-base text-sm font-normal text-center md:w-4/5">Fill the details and
-                            select
-                            the date and
-                            time
-                            which you prefer</p>
-                    </div>
-                    <div class="flex flex-col items-center w-full">
-                        <input type="text" class="px-4 w-full rounded bg-grey border-0 py-2 my-3"
-                            onclick="removeErrorBorder('formName')" placeholder="Name" id="formName">
-                        <input type="text" class="px-4 w-full rounded bg-grey border-0 py-2 mb-3"
-                            onclick="removeErrorBorder('formMail')" placeholder="Email Id" id="formMail">
-                        <input type="text" class="px-4 w-full rounded bg-grey border-0 py-2 mb-3"
-                            onclick="removeErrorBorder('formCompany')" placeholder="Company Name" id="formCompany">
-                        <div class="px-4 flex bg-grey w-full p-2 justify-between rounded mb-3"
-                        onclick="removeBorderCalender('formCalenderDiv')" id="formCalenderDiv">
-                            <img src="images/dateCalender.svg">
-                            <input class="form-date form-control bg-grey border-0 w-full mx-2 formCalender" type="text"
-                                id="datepicker" placeholder="Select Date" onclick="removeBorderCalender('formCalenderDiv')">
-                            <img src="images/inputDrop.svg">
-                        </div>
-                        <div class="px-4 flex bg-grey w-full p-2 justify-between rounded mb-3"
-                            onclick="removeBorderTime('formTimeDiv')" id="formTimeDiv">
-                            <img src="images/clock.svg">
-                            <input class="form-date form-control bg-grey border-0 w-full mx-2" id="formTime" type="time"
-                                 placeholder="Select Time" onclick="removeBorderTime('formTimeDiv')">
-                            <img src="images/inputDrop.svg">
-                        </div>
-                        <p class=" pb-3 text-base font-normal">Our Technical Team will send you a Demo
-                            Meeting Link</p>
-                        <button class="w-full font-medium px-4 py-3 rounded bg-main text-white text-lg"
-                            onclick="schedule()">Schedule
-                            Demo</button>
-                    </div>
-                </div>
-            </div>
+          </div>
+          <div class="modal-right">
+            <img class="bg" src="https://images.unsplash.com/photo-1764795850513-fa8a469a4600?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjByZXRhaWwlMjBzdG9yZSUyMGludmVudG9yeXxlbnwxfHx8fDE3NzYwNzY2NzZ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral" alt="Inventory"/>
+            <div class="gradient"></div>
+            <div class="content"><h3>Inventory Collections</h3><p>Everything you need to manage your entire inventory effortlessly with real-time syncing across all your sales channels.</p></div>
+          </div>
         </div>
+      </div>
 
-        <!-- ######################### popUp ######################### -->
-        <div id="contactUs"
-            class="flex justify-center bg-white items-center hidden rounded drop-shadow-md z-10 fixed content">
-            <div class="grid md:grid-cols-12 grid-cols-1 items-center relative w-full">
-                <img src="images/closeDemo.svg" class="absolute top-0 right-0 pt-4 pr-4" onclick="contactPopUpCancel()">
-                <div class="col-span-5 md:flex hidden">
-                    <img src="images/contactLeft.svg" class="w-full">
-                </div>
-                <div class="flex flex-col md:col-span-7 col-1 md:px-14 px-5 py-5">
-                    <div class="flex flex-col justify-center items-center ">
-                        <p class="md:text-2xl text-xl font-semibold text-center pb-3">Contact us</p>
-                        <p class="mb-0 md:text-base text-sm font-normal text-center">Fill out form to have a talk with
-                            us</p>
-                    </div>
-                    <div class="flex flex-col items-center w-full">
-                        <input type="text" class="px-4 w-full rounded bg-grey border-0 py-2 my-3"
-                            onclick="removeErrorBorder('name')" placeholder="Name*" id="name">
-                        <input type="text" class="px-4 w-full rounded bg-grey border-0 py-2 mb-3"
-                            onclick="removeErrorBorder('mail')" placeholder="Email Id*" id="mail">
-                        <input type="text" class="px-4 w-full rounded bg-grey border-0 py-2 mb-3"
-                            onclick="removeErrorBorder('company')" placeholder="Company Name*" id="company">
-                        <input type="text" class="px-4 w-full rounded bg-grey border-0 py-2 mb-3"
-                            onclick="removeErrorBorder('ContactNo')" placeholder="Contact No*" id="ContactNo">
-                        <textarea type="text" class="px-4 w-full rounded bg-grey border-0 py-2 mb-3"
-                            onclick="removeErrorBorder('message')" rows="5" placeholder="Message*"
-                            id="message"></textarea>
-                        <button class="w-full font-medium px-4 py-3 rounded bg-main text-white text-lg"
-                            onclick="contactUs()">Contact
-                            Us</button>
-                    </div>
-                </div>
+      <!-- Info Modal -->
+      <div class="modal-overlay" id="info-modal">
+        <div class="info-modal-box">
+          <div class="info-header">
+            <h2 class="info-title">Terms &amp; Conditions</h2>
+            <button class="info-close close-info"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
+          </div>
+          <div class="info-body">
+            <div class="info-terms">
+              <div><h3>1. Introduction</h3><p>Welcome to DiTOS. These Terms &amp; Conditions govern your use of our platform, including our point-of-sale system, inventory management, and Shopify integration services. By accessing or using our services, you agree to be bound by these terms.</p></div>
+              <div><h3>2. Service Usage</h3><p>You agree to use our platform strictly for lawful purposes and in accordance with these terms. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p></div>
+              <div><h3>3. Uptime and Support</h3><p>We guarantee a 98.2% uptime for our core services. Support requests are handled within 24 hours. Our "live in 2 weeks" guarantee applies to standard onboardings that meet all prerequisites.</p></div>
+              <div><h3>4. Limitation of Liability</h3><p>To the maximum extent permitted by law, DiTOS shall not be liable for any indirect, incidental, special, consequential or punitive damages, or any loss of profits or revenues, whether incurred directly or indirectly.</p></div>
             </div>
+            <div class="info-privacy" style="display:none">
+              <div><h3>1. Data Collection</h3><p>We collect information you provide directly to us, such as when you create or modify your account, request support, or otherwise communicate with us. This includes your name, email address, phone number, and store details.</p></div>
+              <div><h3>2. How We Use Your Data</h3><p>We use the information we collect to provide, maintain, and improve our services, including processing transactions, syncing your inventory with Shopify, and sending you technical notices and support messages.</p></div>
+              <div><h3>3. Data Sharing</h3><p>We may share your information with third-party vendors, consultants, and other service providers who need access to such information to carry out work on our behalf (e.g., Shopify integration, payment processing).</p></div>
+              <div><h3>4. Security</h3><p>We take reasonable measures to help protect information about you from loss, theft, misuse, unauthorized access, disclosure, alteration, and destruction. Your store data is encrypted in transit and at rest.</p></div>
+            </div>
+          </div>
         </div>
+      </div>
 
-        <!-- ######################### Landing Page ######################### -->
-        <section class="bg-lightBlue flex flex-col justify-center items-center text-center w-full">
-            <div class="flex flex-col md:w-3/5 md:py-10 py-5 px-3 justify-center items-center">
-                <p class="xl:text-6xl md:text-5xl text-3xl font-medium py-5 text-center">Synergizing Retail and
-                    Warehouse Management With <span class="text-main xl:text-6xl md:text-5xl text-3xl  font-medium">Ditos</span></p>
-                <p class="xl:text-base text-sm font-light ">Cloud-based solution for all facets of the
-                    retail &
-                    Wholesale
-                    enables you
-                    to perform businesses
-                    efficiently and adapt to the ever-changing marketplace. It is specifically designed to give
-                    visibility
-                    and streamlined operations for Retail & Warehouse Management</p>
-                <div class="py-5">
-                    <button class="px-3 py-2 font-medium md:text-base text-sm border rounded bg-main text-white"
-                        onclick="popUp()">Book
-                        Demo</button>
-                </div>
+      <!-- Hero -->
+      <div id="home" class="hero">
+        <img class="hero-bg parallax-hero-bg" src="src/assets/4060c04f58b2a42dfff76584d659a94747e0b41d.png" alt="Sky background"/>
+        <div class="hero-inner">
+          <header class="header hero-animate">
+            <img class="logo" src="src/assets/83484c29b36433e07d0c5e87568445e255e14b21.png" alt="DiTOS Logo"/>
+            <div class="nav-pills">
+              <button class="nav-btn nav-active" data-section="home">Home</button>
+              <button class="nav-btn" data-section="features">Features</button>
+              <button class="nav-btn" data-section="who-its-for">Who it's for</button>
+              <button class="nav-btn" data-section="how-it-works">How it works</button>
             </div>
-            <div class="w-full flex items-center justify-center">
-                <img src="images/landingImg.svg" class="md:w-2/3 w-4/5">
+            <button class="btn-white open-contact header-contact-btn">Contact Us</button>
+            <button class="hamburger" id="hamburger-btn" aria-label="Open menu">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+          </header>
+
+          <div class="hero-copy hero-animate">
+            <div class="hero-badge">Trusted by 100+ users</div>
+            <h1 class="hero-h1"><span>Run the Full Pulse of</span><span class="italic-line">Your Store, Online &amp; Offline</span></h1>
+            <p class="hero-sub">DiTOS brings together POS, inventory, Shopify storefront, staff, and analytics into one platform — so you stop switching apps and start growing.</p>
+            <button class="btn-white open-contact" style="margin-top:16px">Contact Us</button>
+            <p class="hero-note">No credit card required · Full onboarding support</p>
+          </div>
+          <div class="dashboard-wrap parallax-hero-card hero-animate">
+            <div class="dashboard-inner"><img src="src/assets/99f4205d2aec4d2471fc67a5de303f64a60779d5.png" alt="Dashboard Preview"/></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Problem Section -->
+      <div class="section">
+        <div class="section-header">
+          <div class="section-header-row animate-on-scroll">
+            <div class="section-header-left">
+              <div class="pill">The Problem</div>
+              <div><div class="section-heading-main">Most Store Owners Have Tools.</div><div class="section-heading-sub">Few Actually Work Together.</div></div>
             </div>
+            <p class="section-desc">Scattered data across too many apps, Reports take too long to build manually, Dashboards show numbers, not insights, Online and offline stock always out of sync, Hours lost on end-of-day reconciliation</p>
+          </div>
+          <div class="cards-grid">
+            <div class="card animate-on-scroll"><div class="card-emoji">📦</div><div class="card-body"><h3 class="card-title">Inventory That Lies</h3><p class="card-desc">Your Shopify store shows 'In Stock' for items that ran out at the counter two days ago. Overselling wastes time and kills trust.</p></div></div>
+            <div class="card animate-on-scroll"><div class="card-emoji">🧾</div><div class="card-body"><h3 class="card-title">Billing That Doesn't Scale</h3><p class="card-desc">Manual billing, mismatched GST, end-of-day reconciliation that takes 2+ hours. Every. Single. Day.</p></div></div>
+            <div class="card animate-on-scroll"><div class="card-emoji">🔦</div><div class="card-body"><h3 class="card-title">Zero Real-time Visibility</h3><p class="card-desc">You don't know what's selling, what's expiring, or how your staff performed unless you're physically at the store.</p></div></div>
+            <div class="card animate-on-scroll"><div class="card-emoji">🧩</div><div class="card-body"><h3 class="card-title">Too Many Apps, No Sync</h3><p class="card-desc">POS doesn't talk to your website. Website doesn't talk to accounts. You're the human middleware connecting everything.</p></div></div>
+            <div class="card animate-on-scroll"><div class="card-emoji">😰</div><div class="card-body"><h3 class="card-title">Going Online Is Intimidating</h3><p class="card-desc">Shopify setup looks great until you're staring at 40 settings you don't understand and no one to walk you through it.</p></div></div>
+            <div class="card animate-on-scroll"><div class="card-emoji">😤</div><div class="card-body"><h3 class="card-title">Customers Feel the Pain Too</h3><p class="card-desc">Slow checkouts, wrong prices at pickup, out-of-stock surprises — your customers notice before you do.</p></div></div>
+          </div>
+        </div>
+      </div>
 
-        </section>
-
-        <!-- ######################### heading ######################### -->
-
-        <section class="p-4 flex flex-col justify-center items-center text-center">
-            <button
-                class="rounded-full md:text-base text-xs font-medium text-main px-6 md:mt-20 mt-5 mb-5 py-2 keyBtn">Key
-                Modules</button>
-            <p class="font-semibold md:text-3xl text-xl">What makes different from Others</p>
-        </section>
-
-        <!-- ######################### different ##################### -->
-
-        <section class="px-5">
-            <div class="blueBox my-3 px-5 py-7 grid grid-cols-12 justify-center items-center">
-                <div class="md:col-span-5 col-span-12 flex flex-col justify-center items-center">
-                    <p class="font-semibold md:text-xl text-lg py-3 md:hidden">Inventory Management</p>
-                    <img src="images/inventory.svg" class="">
-                </div>
-                <div class="md:col-span-7 col-span-12">
-                    <div class="flex flex-col">
-                        <p class="font-semibold text-xl md:flex hidden">Inventory Management</p>
-                        <p class="font-normal text-base py-4 text-justify">Inventory management is the process of
-                            overseeing
-                            and
-                            controlling a
-                            company's inventory or stock of goods and materials. It involves the planning, acquisition,
-                            storage, tracking, and disposal of items that a business uses to produce goods or provide
-                            services. Effective inventory management is crucial for businesses of all sizes, as it
-                            directly
-                            impacts operational efficiency, customer satisfaction, and financial performance.
-                        </p>
-                        <div class="grid md:grid-cols-4 grid-cols-2 gap-2 items-center">
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Inventory Classification</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Inventory Tracking</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Inventory Control</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Inventory Storage</p>
-                        </div>
-                    </div>
-                </div>
+      <!-- Who It's For -->
+      <div id="who-its-for" class="section-gray">
+        <div class="section-gray-inner">
+          <div class="animate-on-scroll" style="display:flex;flex-direction:column;align-items:center;gap:16px">
+            <div class="pill pill-white">Who It's For</div>
+            <div style="text-align:center"><div class="section-heading-main">Built for Both Kinds</div><div class="section-heading-sub">of Store Owners</div></div>
+            <p class="section-desc" style="text-align:center;max-width:696px;margin-top:8px">Whether you're taking your physical store online, or building a D2C brand that needs physical presence — DITOS handles it all.</p>
+          </div>
+          <div class="audience-grid">
+            <div class="audience-card audience-white animate-on-scroll">
+              <div><h3 class="audience-title" style="color:#202020">The Offline Retailer Going Digital</h3><p class="audience-desc" style="color:#858489;margin-top:15px">You have a thriving store but you're losing customers who prefer to order online. Tech isn't your thing — we make it effortless.</p></div>
+              <div class="audience-list">
+                <div class="list-item animate-on-scroll"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#0671bb"/></svg><span>Kirana &amp; grocery stores</span></div>
+                <div class="list-item animate-on-scroll"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#0671bb"/></svg><span>Clothing &amp; fashion boutiques</span></div>
+                <div class="list-item animate-on-scroll"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#0671bb"/></svg><span>Electronics &amp; appliances shops</span></div>
+                <div class="list-item animate-on-scroll"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#0671bb"/></svg><span>Pharmacies &amp; medical stores</span></div>
+                <div class="list-item animate-on-scroll"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#0671bb"/></svg><span>Restaurants &amp; cloud kitchens</span></div>
+                <div class="list-item animate-on-scroll"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#0671bb"/></svg><span>Hardware &amp; home goods stores</span></div>
+              </div>
             </div>
-
-            <div class="blueBox my-3 px-5 py-7 grid grid-cols-12 justify-center items-center differentWhite">
-                <div class="md:col-span-5 col-span-12 flex md:hidden flex-col justify-center items-center">
-                    <p class="font-semibold md:text-xl text-lg py-3 md:hidden">Warehouse Management</p>
-                    <img src="images/warehouse.svg" class="">
-                </div>
-                <div class="md:col-span-7 col-span-12">
-                    <div class="flex flex-col">
-                        <p class="font-semibold text-xl md:flex hidden">Warehouse Management</p>
-                        <p class="font-normal text-base py-4 text-justify">Warehouse management is the comprehensive
-                            process
-                            of planning, organizing, and controlling all activities within a warehouse or distribution
-                            center. Its primary goal is to efficiently and effectively manage the flow of goods, from
-                            the
-                            arrival of products at the warehouse to their storage, picking, packing, and eventual
-                            shipping
-                            to customers or other locations.
-                        </p>
-                        <div class="grid md:grid-cols-4 grid-cols-2 gap-2 items-center">
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Receiving and Inspection</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full"> Inventory Storage</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Order Fulfillment</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Packing and Shipping</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Returns and Quality Control</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Technology Integration</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Workforce Management</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:col-span-5 col-span-12 md:flex hidden flex-col justify-center items-center">
-                    <p class="font-semibold md:text-xl text-lg py-3 md:hidden">Inventory Management</p>
-                    <img src="images/warehouse.svg" class="">
-                </div>
+            <div class="audience-card audience-blue animate-on-scroll">
+              <div><h3 class="audience-title" style="color:#fff">The Online Brand Opening Physical</h3><p class="audience-desc" style="color:rgba(255,255,255,0.95);margin-top:15px">You've built a D2C brand on Shopify and now want physical stores. Keep everything in sync without a technical team.</p></div>
+              <div class="audience-list">
+                <div class="list-item animate-on-scroll"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#0671bb"/></svg><span>D2C brands opening pop-ups or outlets</span></div>
+                <div class="list-item animate-on-scroll"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#0671bb"/></svg><span>Shopify merchants with retail presence</span></div>
+                <div class="list-item animate-on-scroll"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#0671bb"/></svg><span>Multi-city retail chains</span></div>
+                <div class="list-item animate-on-scroll"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#0671bb"/></svg><span>Franchise &amp; multi-outlet businesses</span></div>
+                <div class="list-item animate-on-scroll"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#0671bb"/></svg><span>Corporate gifting &amp; B2B sellers</span></div>
+                <div class="list-item animate-on-scroll"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.49 2 2 6.49 2 12C2 17.51 6.49 22 12 22C17.51 22 22 17.51 22 12C22 6.49 17.51 2 12 2ZM16.78 9.7L11.11 15.37C10.97 15.51 10.78 15.59 10.58 15.59C10.38 15.59 10.19 15.51 10.05 15.37L7.22 12.54C6.93 12.25 6.93 11.77 7.22 11.48C7.51 11.19 7.99 11.19 8.28 11.48L10.58 13.78L15.72 8.64C16.01 8.35 16.49 8.35 16.78 8.64C17.07 8.93 17.07 9.4 16.78 9.7Z" fill="#0671bb"/></svg><span>Subscription box &amp; specialty brands</span></div>
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-            <div class="blueBox my-3 px-5 py-7 grid grid-cols-12 justify-center items-center">
-                <div class="md:col-span-5 col-span-12 flex flex-col justify-center items-center">
-                    <p class="font-semibold md:text-xl text-lg py-3 md:hidden">Point Of Sale</p>
-                    <img src="images/point.svg" class="">
-                </div>
-                <div class="md:col-span-7 col-span-12">
-                    <div class="flex flex-col">
-                        <p class="font-semibold text-xl md:flex hidden">Point Of Sale</p>
-                        <p class="font-normal text-base py-4 text-justify">Our comprehensive software Solution that
-                            facilitates the transaction process in a retail or hospitality establishment. Its primary
-                            purpose is to streamline and automate sales-related tasks, making it an indispensable tool
-                            for
-                            businesses of all sizes, from small boutiques to large chain stores and restaurants.
-                        </p>
-                        <div class="grid md:grid-cols-4 grid-cols-2 gap-2 items-center">
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Sales Processing</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Inventory Management</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Employee Management</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Reporting and Analytics</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Security</p>
-                        </div>
-                    </div>
-                </div>
+      <!-- Features -->
+      <div id="features" class="section">
+        <div class="section-header">
+          <div class="section-header-row animate-on-scroll" style="align-items:flex-end">
+            <div class="section-header-left">
+              <div class="pill">The Solution</div>
+              <div><div class="section-heading-main">Everything Your Store Needs.</div><div class="section-heading-sub">Nothing It Doesn't.</div></div>
             </div>
-
-            <div class="blueBox my-3 px-5 py-7 grid grid-cols-12 justify-center items-center differentWhite">
-                <div class="md:col-span-5 col-span-12 md:hidden flex flex-col justify-center items-center">
-                    <p class="font-semibold md:text-xl text-lg py-3 md:hidden">Supply Chain Management</p>
-                    <img src="images/supply.svg" class="">
-                </div>
-                <div class="md:col-span-7 col-span-12">
-                    <div class="flex flex-col">
-                        <p class="font-semibold text-xl md:flex hidden">Supply Chain Management</p>
-                        <p class="font-normal text-base py-4 text-justify">SCM is the comprehensive coordination,
-                            planning,
-                            and optimization of all processes involved in the flow of goods, services, information, and
-                            finances from the initial production of raw materials to the final delivery of products to
-                            customers. It plays a critical role in ensuring the efficiency, competitiveness, and
-                            sustainability of businesses across various industries.
-                        </p>
-                        <div class="grid md:grid-cols-4 grid-cols-2 gap-2 items-center">
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Sales Processing</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Distribution</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Order Fulfillment</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Inventory Storage</p>
-                            <p class="differentBtn p-2 md:text-sm text-xs h-full">Reporting and Analytics</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="md:col-span-5 col-span-12 md:flex hidden flex-col justify-center items-center">
-                    <img src="images/supply.svg" class="">
-                </div>
+            <div class="tags-row">
+              <div class="pill">Shopify</div><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM18 12.75H12.75V18C12.75 18.41 12.41 18.75 12 18.75C11.59 18.75 11.25 18.41 11.25 18V12.75H6C5.59 12.75 5.25 12.41 5.25 12C5.25 11.59 5.59 11.25 6 11.25H11.25V6C11.25 5.59 11.59 5.25 12 5.25C12.41 5.25 12.75 5.59 12.75 6V11.25H18C18.41 11.25 18.75 11.59 18.75 12C18.75 12.41 18.41 12.75 18 12.75Z" fill="#0671bb"/></svg><div class="pill">DiTOS</div><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM18.53 12.53L14.24 16.82C14.09 16.97 13.9 17.04 13.71 17.04C13.52 17.04 13.33 16.97 13.18 16.82C12.89 16.53 12.89 16.05 13.18 15.76L16.19 12.75H6C5.59 12.75 5.25 12.41 5.25 12C5.25 11.59 5.59 11.25 6 11.25H16.19L13.18 8.24C12.89 7.95 12.89 7.47 13.18 7.18C13.47 6.89 13.95 6.89 14.24 7.18L18.53 11.47C18.67 11.61 18.75 11.8 18.75 12C18.75 12.2 18.67 12.39 18.53 12.53Z" fill="#0671bb"/></svg><span class="tags-label">Complete store stack</span>
             </div>
-        </section>
+          </div>
+          <div class="cards-grid">
+            <div class="card animate-on-scroll card-wide"><div class="card-emoji">🖥️</div><div class="card-body"><h3 class="card-title">Point of Sale (POS)</h3><p class="card-desc">Blazing fast billing at the counter — barcode scanning, GST-ready invoices, UPI/card/cash, WhatsApp receipts. Works offline and syncs automatically when you're back online. No more end-of-day data entry.</p></div></div>
+            <div class="card animate-on-scroll"><div class="card-emoji">📦</div><div class="card-body"><h3 class="card-title">Inventory Management</h3><p class="card-desc">Real-time stock across store and online. Auto low-stock alerts, batch tracking, and expiry management. Never oversell again.</p></div></div>
+            <div class="card animate-on-scroll"><div class="card-emoji">🛍️</div><div class="card-body"><h3 class="card-title">Shopify Setup &amp; Sync</h3><p class="card-desc">We build your Shopify store, add products, and keep inventory in sync bidirectionally. One source of truth.</p></div></div>
+            <div class="card animate-on-scroll"><div class="card-emoji">📊</div><div class="card-body"><h3 class="card-title">Analytics &amp; Reports</h3><p class="card-desc">Best-sellers, peak hours, revenue by channel, staff performance — all in one dashboard.</p></div></div>
+            <div class="card animate-on-scroll"><div class="card-emoji">👥</div><div class="card-body"><h3 class="card-title">Staff &amp; Role Management</h3><p class="card-desc">Assign permissions by role. Track billing, attendance, and shifts. Cashier vs manager views built in.</p></div></div>
+            <div class="card animate-on-scroll"><div class="card-emoji">🚚</div><div class="card-body"><h3 class="card-title">Vendor &amp; Purchase Orders</h3><p class="card-desc">Manage suppliers, raise POs, auto-update stock on delivery. Full purchase history and payment tracking.</p></div></div>
+            <div class="card animate-on-scroll"><div class="card-emoji">💬</div><div class="card-body"><h3 class="card-title">Customer CRM &amp; Loyalty</h3><p class="card-desc">Track regulars, purchase history, loyalty points, and send targeted WhatsApp offers. One-time buyers become loyal customers.</p></div></div>
+            <div class="card animate-on-scroll"><div class="card-emoji">📱</div><div class="card-body"><h3 class="card-title">Shopify App <span style="background:linear-gradient(to right,#0671bb,#80c5f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Exclusive</span></h3><p class="card-desc">Every Shopify store stands out online, but customers love shopping via apps. DITOS offers a custom mobile app that integrates perfectly with your Shopify store, providing a unique solution!</p></div></div>
+          </div>
+        </div>
+      </div>
 
-        <!-- ######################### Features ######################### -->
+      <!-- How It Works -->
+      <div id="how-it-works" class="section-gray">
+        <div class="section-gray-inner">
+          <div class="animate-on-scroll" style="display:flex;flex-direction:column;align-items:center;gap:16px;max-width:696px;text-align:center">
+            <div class="pill pill-white">How It Works</div>
+            <div><div class="section-heading-main">Up and Running in 3 Steps.</div><div class="section-heading-sub">We Handle the Setup.</div></div>
+            <p class="section-desc" style="margin-top:8px">Our team does the heavy lifting. You're live in 2 weeks — not 48 days.</p>
+          </div>
+          <div class="steps-grid">
+            <div class="step-card animate-on-scroll"><div class="step-num">1</div><h3 class="step-title">We Set Up Your Store</h3><p class="step-desc">Our team onboards you, configures DiTOS for your business type, and builds your Shopify storefront — branding, products, and payment gateway included.</p></div>
+            <div class="step-card animate-on-scroll"><div class="step-num">2</div><h3 class="step-title">We Sync Everything</h3><p class="step-desc">Products, prices, and inventory are synced between your physical POS and Shopify — automatically, in real time. No manual data entry.</p></div>
+            <div class="step-card animate-on-scroll"><div class="step-num">3</div><h3 class="step-title">You Just Run Your Business</h3><p class="step-desc">Sell at the counter or online. Orders flow in, inventory updates, reports generate — and your customers get a seamless experience either way.</p></div>
+          </div>
+        </div>
+      </div>
 
-        <section class="py-10 px-5 my-7 flex flex-col justify-center items-center text-center bg-black">
-            <button
-                class="rounded-full md:text-base text-xs font-medium text-white px-6 py-1 mb-5 border" style="border: 1px solid rgba(255, 255, 255, 0.16); background: rgba(255, 255, 255, 0.11);">Features</button>
-            <p class="font-semibold md:text-4xl text-xl text-white">What makes different from Others</p>
-
-            <div class="grid md:grid-cols-4 grid-cols-1 gap-3 w-full mt-7">
-                <div class="flex flex-col justify-center items-center text-center md:py-10 py-7 rounded bg-white">
-                    <img src="images/user.svg" class="md:py-4 py-7">
-                    <p class="font-medium text-xl">User-Friendly</p>
-                </div>
-
-                <div class="flex flex-col justify-center items-center text-center md:py-10 py-7 rounded bg-white">
-                    <img src="images/billing.svg" class="md:py-4 py-7">
-                    <p class="font-medium text-xl">Fast Billing</p>
-                </div>
-
-                <div class="flex flex-col justify-center items-center text-center md:py-10 py-7 rounded bg-white">
-                    <img src="images/safe.svg" class="md:py-4 py-7">
-                    <p class="font-medium text-xl">Safe &Secure</p>
-                </div>
-
-                <div class="flex flex-col justify-center items-center text-center md:py-10 py-7 rounded bg-white">
-                    <img src="images/techSupport.svg" class="md:py-4 py-7">
-                    <p class="font-medium text-xl">Technical Support</p>
-                </div>
-
+      <!-- CTA Section -->
+      <div class="section" style="display:flex;flex-direction:column;gap:48px">
+        <div class="cta-row animate-on-scroll">
+          <div style="display:flex;flex-direction:column;gap:24px;max-width:696px;width:100%">
+            <div class="section-header-left">
+              <div class="pill pill-white">The Solution</div>
+              <div><div class="section-heading-main">Ask DITOS to Run</div><div class="section-heading-sub">Your Entire Store</div></div>
             </div>
-        </section>
-
-        <!-- ######################### Business ######################### -->
-
-        <section class="px-5 my-4">
-            <div class="bg-main rounded py-20 flex flex-col justify-center items-center text-center">
-                <p class="font-semibold text-white md:text-4xl text-xl">Level Up Your Business With Us</p>
-                <p class="font-normal md:text-base text-sm py-3 text-white md:w-2/5 w-4/5">Ditos software is a crucial
-                    step
-                    towards improving
-                    efficiency,
-                    reducing
-                    costs, and enhancing customer satisfaction.
-                </p>
-                <button class="py-2 px-3 text-main bg-white md:text-base text-sm rounded my-3 font-semibold"
-                    onclick="contactPopUp()">Request A
-                    Call
-                    back</button>
+            <div class="divider"></div>
+            <div class="cta-stats">
+              <div><div class="cta-stat-val">98.2%</div><div class="cta-stat-label">Uptime guaranteed</div></div>
+              <div><div class="cta-stat-val">2 Weeks</div><div class="cta-stat-label">Average go-live time</div></div>
             </div>
-        </section>
-
-        <!-- ######################### footer ######################### -->
-        <section class="px-5 footer ">
-            <div class="pt-7 flex flex-col justify-center items-center text-center">
-                <div class="">
-                    <img src="images/footerLogo.svg">
-                </div>
-                <div class="flex justify-center items-center">
-                    <p class="font-normal text-center md:w-3/5 text-white md:text-base text-sm">Ditos is a cloud based
-                        platform, It is specifically
-                        designed to give
-                        visibility and streamlined operations for Retail & Warehouse Management.</p>
-                </div>
-                <div class=" flex gap-3 md:py-4 py-10">
-                    <img src="images/insta.svg">
-                    <img src="images/whatsapp.svg">
-                    <img src="images/facebook.svg">
-                </div>
-                <div class="border-t w-full mt-5">
-                    <p class="font-medium py-5 md:text-lg text-sm text-white">Copyright © 2023 Ditos</p>
-                </div>
+          </div>
+          <div class="cta-right">
+            <p class="section-desc" style="text-align:right">Full setup support, live in 2 weeks — guaranteed.</p>
+            <button class="btn-blue open-contact">Contact Us</button>
+          </div>
+        </div>
+        <div class="big-image-wrap">
+          <img src="src/assets/048d8207678db26528a58e67d43c00bbb573b249.png" alt="Storeowner using app"/>
+          <div class="big-image-card parallax-big-card">
+            <div class="big-image-inner">
+              <img class="logo-sm" src="src/assets/cf5a0620004fc08d2c80ddd7503e06f19d8580a4.png" alt="DiTOS Logo"/>
+              <div style="width:24px;height:24px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M16.19 2H7.81C4.17 2 2 4.17 2 7.81V16.18C2 19.83 4.17 22 7.81 22H16.18C19.82 22 21.99 19.83 21.99 16.19V7.81C22 4.17 19.83 2 16.19 2ZM18 12.75H12.75V18C12.75 18.41 12.41 18.75 12 18.75C11.59 18.75 11.25 18.41 11.25 18V12.75H6C5.59 12.75 5.25 12.41 5.25 12C5.25 11.59 5.59 11.25 6 11.25H11.25V6C11.25 5.59 11.59 5.25 12 5.25C12.41 5.25 12.75 5.59 12.75 6V11.25H18C18.41 11.25 18.75 11.59 18.75 12C18.75 12.41 18.41 12.75 18 12.75Z" fill="#0671bb"/></svg></div>
+              <div class="shopify-logo"><img src="src/assets/1e64cd9c0f9bf31ea9c0eec7f6c24452851d5d96.png" alt="Shopify Logo"/></div>
             </div>
-        </section>
+          </div>
+        </div>
+      </div>
 
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-inner">
+          <div class="footer-top">
+            <div class="footer-brand">
+              <img src="src/assets/cf5a0620004fc08d2c80ddd7503e06f19d8580a4.png" alt="DiTOS Logo"/>
+              <p>Digital Transformation of Stores — the complete operating system for Indian retail, online and offline.</p>
+            </div>
+            <div class="footer-links">
+              <div class="footer-col"><span class="footer-col-title">Product</span><a href="#home">Home</a><a href="#features">Features</a><a href="#who-its-for">Who it's for</a><a href="#how-it-works">How it works</a></div>
+              <div class="footer-col"><span class="footer-col-title">Company</span><button class="open-terms">Terms &amp; Conditions</button><button class="open-privacy">Privacy Policy</button></div>
+              <div class="footer-col"><span class="footer-col-title">Contact Us</span><a href="mailto:contactus@technoboost.in">contactus@technoboost.in</a><a href="tel:+919632968050">+91 9632968050</a></div>
+            </div>
+          </div>
+          <div class="divider" style="margin-top:20px"></div>
+          <p class="footer-copy">&copy; 2026 DITOS. All rights reserved. Made with &#10084;&#65039; for Indian retail.</p>
+        </div>
+      </footer>
 
+    </div>
 
-        <script src="index.js">
-        </script>
-        <script>
-            $( function() {
-              $( "#datepicker" ).datepicker();
-            } );
-            </script>
-        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-        <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
-    </body>
+    <!-- Mobile Nav Drawer -->
+    <div class="mobile-nav" id="mobile-nav">
+      <div class="mobile-nav-header">
+        <img class="logo" src="src/assets/83484c29b36433e07d0c5e87568445e255e14b21.png" alt="DiTOS Logo"/>
+        <button class="mobile-nav-close" id="mobile-nav-close" aria-label="Close menu">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <nav class="mobile-nav-links">
+        <button class="mobile-nav-btn" data-section="home">Home</button>
+        <button class="mobile-nav-btn" data-section="features">Features</button>
+        <button class="mobile-nav-btn" data-section="who-its-for">Who it's for</button>
+        <button class="mobile-nav-btn" data-section="how-it-works">How it works</button>
+      </nav>
+      <button class="btn-blue open-contact mobile-contact-btn">Contact Us</button>
+    </div>
 
+    <script src="script.js"></script>
+  </body>
 </html>
